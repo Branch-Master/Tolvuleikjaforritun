@@ -1,0 +1,80 @@
+//"use strict";
+
+console.log(2+2);
+console.log("hello");
+
+var square = function(x) { return x * x;
+};
+
+
+
+function out(thing){
+ console.log(thing);
+ document.getElementById("output").innerHTML += thing +  "<br/>";
+}
+
+out( square(6) );
+
+function abs(number){
+ if( number < 0) return number*(-1);
+ else {return number;};
+};
+out( abs(-4) );
+
+function maxOfTwo(a, b) {
+	if(a < b) return b;
+  else { return a; };
+};
+
+out( maxOfTwo(10,5) );
+
+function maxOfThree(a, b, c) {
+	var ab = maxOfTwo(a,b);
+  return maxOfTwo(ab,c);
+};
+out( maxOfThree(27,26,28) );
+
+function medOfThree(a, b, c) {
+	var med = maxOfTwo(a,b);
+  if( maxOfTwo(med,c) === c ) return med;
+  else{
+   med = c;
+  return med;
+  };
+};
+out(medOfThree(2,5,9));
+
+
+function isPrime(integer) {
+  if(integer<2 || integer%2 ===0)return false;
+  else{
+    for(i=3;i<integer;i+=2){
+      if(integer%i === 0) return false;
+    }
+  }
+  return true;
+}
+
+function reverseString(str) {
+  var revstr = "";
+  for(i=1; i<str.length +1;i++){
+    revstr += str[str.length -i];
+  }
+  return revstr;
+}
+
+out(reverseString("doog yrev"));
+
+
+
+function isPunct(chr) {
+  var punct = [",","!",".",":",";","/","(",")"];
+  var boo = false;
+  for(i=0;i<punct.length;i++){
+    if(chr === punct[i]){ boo = true;}
+  }
+  return boo;
+}
+
+out(isPunct("("));
+

@@ -78,3 +78,32 @@ function isPunct(chr) {
 
 out(isPunct("("));
 
+
+function extractWords(str) {
+	var curr = "";
+  var cnt = 0;
+  var arr = [];
+  for(var i=0; i<= str.length; i++){
+  	if(str[i] === " "){
+     	arr[cnt] = curr;
+    	cnt++;
+     	curr = "";
+    }
+    else if( isPunct(str[i]) ){}
+    else if(i === str.length){ 
+    	arr[cnt] = curr;}
+    else{
+    	curr += str[i];
+    }
+  }
+  return arr;
+}
+
+function decodeMnemonic(str) {
+	var ord = extractWords(str);
+  var decode = "";
+ 	for(var i=0; i< ord.length;i++){
+  	decode += ord[i].length;
+  }
+  return decode;
+}

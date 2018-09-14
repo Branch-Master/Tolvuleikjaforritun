@@ -107,3 +107,6 @@ function decodeMnemonic(str) {
   }
   return decode;
 }
+//<div id="output"></div>
+
+//https://jsfiddle.net/9am7hoLp/36/

@@ -48,7 +48,7 @@ out(medOfThree(2,5,9));
 function isPrime(integer) {
   if(integer<2 || integer%2 ===0)return false;
   else{
-    for(i=3;i<integer;i+=2){
+    for(var i=3;i<integer;i+=2){
       if(integer%i === 0) return false;
     }
   }

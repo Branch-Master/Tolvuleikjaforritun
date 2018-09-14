@@ -1,0 +1,84 @@
+"use strict";
+
+// It's up to you whether to take advantage of these variables.
+var g_defaultSmileyX = 200,
+    g_defaultSmileyY = 200,
+    g_defaultSmileyRadius = 150;
+
+// =======================
+// YOUR STUFF GOES HERE...
+// =======================
+
+// Replace my place-holder implementation of `drawDefaultSmiley` with your own.
+// Use the same function name though (this will be important later).
+//
+function drawDefaultSmiley(ctx) {
+    // Here's an example of how to use the fillEllipse helper-function
+  
+  ctx.fillStyle = "#FFCC01";
+  fillEllipse(ctx, 200, 200, 150, 150, Math.PI);
+  ctx.fill();
+  
+  
+  ctx.arc(200, 200, 100, Math.PI*0.15, Math.PI*0.85);
+	ctx.lineWidth = 5;
+	ctx.stroke();
+  
+  ctx.fillStyle="black";
+  fillEllipse(ctx,150,150,10,30,Math.PI);
+  fillEllipse(ctx,250,150,10,30,Math.PI);
+  fillEllipse(ctx,110,240,15,5,Math.PI*0.85);
+  fillEllipse(ctx,290,240,15,5,Math.PI*0.15);
+  ctx.fill();
+  
+  ctx.fillStyle="red";
+	fillEllipse(ctx,105,105,15,30,Math.PI*0.25);
+  fillEllipse(ctx,135,145,60,2.5,Math.PI*1.28);
+  fillEllipse(ctx,172,190,11,4.4,Math.PI*1.28);
+  fillEllipse(ctx,115,121,15,5,Math.PI*1.28);
+  ctx.fill();
+ 
+  
+}
+
+
+// =============
+// TEST "DRIVER"
+// =============
+
+function draw() { 
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+
+    drawDefaultSmiley(ctx);
+}
+
+draw();
+
+
+// ================
+// HELPER FUNCTIONS
+// ================
+
+function fillEllipse(ctx, cx, cy, halfWidth, halfHeight, angle) {
+    ctx.save(); // save the current ctx state, to restore later
+    ctx.beginPath();
+    
+    // These "matrix ops" are applied in last-to-first order
+    // ..which can seem a bit weird, but actually makes sense
+    //
+    // After modifying the ctx state like this, it's important
+    // to restore it
+    ctx.translate(cx, cy);
+    ctx.rotate(angle);
+    ctx.scale(halfWidth, halfHeight);
+    
+    // Just draw a unit circle, and let the matrices do the rest!
+    ctx.arc(0, 0, 1, 0, Math.PI*2);
+    ctx.fill();
+    
+    ctx.beginPath(); // reset to an empty path
+    ctx.restore();
+}
+
+//https://jsfiddle.net/phL5xr3k/86/

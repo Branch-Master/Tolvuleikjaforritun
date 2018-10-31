@@ -42,7 +42,7 @@ Ship.prototype.numSubSteps = 1;
 Ship.prototype.alive = true;
 
 Ship.prototype.update = function(du) {
-    if(this.alive){
+    if(this.alive){ //is the ship dead?
     var steps = this.numSubSteps;
     var dStep = du / steps;
     for (var i = 0; i < steps; ++i) {
@@ -195,5 +195,5 @@ Ship.prototype.render = function(ctx) {
 };
 
 Ship.prototype.killShip = function(){
-    this.alive = false;
+    this.alive = false; //"kills" ship 
 }

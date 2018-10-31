@@ -57,10 +57,18 @@ function Rock() {
     // Set the rotational velocity between the MIN and MAX above.
     // (Again, these are expressed in pixels per second).
     
-    var rot = util.randRange(MIN_ROT_SPEED,MAX_ROT_SPEED)*dirn;
+    var rotdir = pos_or_neg(); //rotation randomly clockwise or anti-clockwise
+    // rotation speed is random:
+    this.velRot = (util.randRange(MIN_ROT_SPEED,MAX_ROT_SPEED)/SECS_TO_NOMINALS)*rotdir;
 
-    this.velRot = (util.randRange(MIN_ROT_SPEED,MAX_ROT_SPEED)/SECS_TO_NOMINALS);
-
+}
+// retuns 1 or -1 randomly with 50/50 odds
+function pos_or_neg(){
+    var rand = Math.random();
+    if(rand <= 0.5){
+        return -1;
+    }
+    return 1;
 }
 
 
@@ -101,24 +109,3 @@ Rock.prototype.render = function (ctx) {
     
 
 };
-
-/* 
-Rock.prototype.collide = function(prevX, prevY, nextX, nextY, r){
-
-    if( check_a_point(this.cx,this.cy,nextX,nextY,30) && 
-        !check_a_point(this.cx,this.cy,prevX,prevY,30) ){
-            console.log("hit");
-            return true;
-    }
-
-};
-
-function check_a_point(rock_x, rock_y, ship_x, ship_y, radius) {
-    var dist_points = util.square(rock_x - ship_x) + util.square(rock_y - ship_y);
-    var r = util.square(radius);
-    if (dist_points < r) {
-        return true;
-    }
-    return false;
-}
-*/ 

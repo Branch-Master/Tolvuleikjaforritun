@@ -42,23 +42,17 @@ _generateRocks : function() {
     for(i=0; i<NUM_ROCKS;i++){
         this._rocks.push(new Rock());
     }
-
-    // TODO: Make `NUM_ROCKS` Rocks!
 },
 
 _findNearestShip : function(posX, posY) {
     
-    // TODO: Implement this
-
-    // NB: Use this technique to let you return "multiple values"
-    //     from a function. It's pretty useful!
-    //
     var min_offset = 1000000;
     var closestShip; 
     var closestIndex;
     var y_offset;
     var x_offset;
 
+    // using Pythagoras rule to find shortest distance 
     for(var i=0; i<this._ships.length; i++){
         if(this._ships[i].alive){
         y_offset = this._ships[i].cy - posY;
@@ -111,25 +105,22 @@ init: function() {
 },
 
 fireBullet: function(cx, cy, velX, velY, rotation) {
-
-    // TODO: Implement this
+    //new bullet into the _bullets array  
     this._bullets.push(new Bullet({cx,cy,velX,velY,rotation}));
     
 },
 
 generateShip : function(descr) {
-    // TODO: Implement this
+    //new ship into the _ships array
     this._ships.push(new Ship(descr));
 },
 
 killNearestShip : function(xPos, yPos) {
-    // TODO: Implement this
 
-    // NB: Don't forget the "edge cases"
    var shipInfo = this._findNearestShip(xPos,yPos);
    var indexOfShip = shipInfo.theIndex;
 
-   if(shipInfo.theIndex === undefined){return;}
+   if(shipInfo.theIndex === undefined){return;} //if there are no ships to kill
 
     this._ships[indexOfShip].killShip();
        
@@ -143,7 +134,7 @@ yoinkNearestShip : function(xPos, yPos) {
     var shipInfo = this._findNearestShip(xPos,yPos);
     var indexOfShip = shipInfo.theIndex;
  
-    if(shipInfo.theIndex === undefined){return;}
+    if(shipInfo.theIndex === undefined){return;} //if there are no ships to yoink
 
     this._ships[indexOfShip].cx = xPos;
     this._ships[indexOfShip].cy = yPos;
@@ -164,8 +155,6 @@ toggleRocks: function() {
 
 update: function(du) {
 
-    // TODO: Implement this
-
     // NB: Remember to handle the "KILL_ME_NOW" return value!
     //     and to properly update the array in that case.
     for(var i=0;i<this._ships.length;i++){
@@ -184,21 +173,21 @@ update: function(du) {
 
 render: function(ctx) {
 
-    // TODO: Implement this
-
     // NB: Remember to implement the ._bShowRocks toggle!
     // (Either here, or if you prefer, in the Rock objects)
-    for(var i=0;i<this._ships.length;i++){
-        this._ships[i].render(ctx);
-    }
+    
     if(this._bShowRocks){
          for(var i=0; i< this._rocks.length; i++){
         this._rocks[i].render(ctx);
         }
     }
-   
+    
     for(var i=0;i<this._bullets.length;i++){
         this._bullets[i].render(ctx);
+    }
+    
+    for(var i=0;i<this._ships.length;i++){
+        this._ships[i].render(ctx);
     }
     
 }

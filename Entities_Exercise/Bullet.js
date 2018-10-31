@@ -43,7 +43,9 @@ Bullet.prototype.update = function (du) {
          this.cx = this.cx + this.velX*du;
     this.cy = this.cy + this.velY*du;
     this.rotation += du; 
-    this.lifeSpan -= du;  
+    this.lifeSpan -= du; 
+    
+    this.wrapPosition();
     }
  
 };
@@ -62,6 +64,8 @@ Bullet.prototype.wrapPosition = function () {
     this.cy = util.wrapRange(this.cy, 0, g_canvas.height);
 };
 
+
+
 Bullet.prototype.render = function (ctx) {
 
     // TODO: Modify this to implement a smooth "fade-out" during
@@ -69,15 +73,15 @@ Bullet.prototype.render = function (ctx) {
 
     // NB: You can make things fade by setting `ctx.globalAlpha` to
     // a value between 0 (totally transparent) and 1 (totally opaque).
-
-    var fadeThresh = Bullet.prototype.lifeSpan / 3;
+var fadeThresh = Bullet.prototype.lifeSpan / 3;
+    
 
     // ..YOUR STUFF..
     if(this.lifeSpan > 0){
     ctx.save();
 
     if(this.lifeSpan < fadeThresh){
-        ctx.globalAlpha = this.lifeSpan / fadeThresh ;
+        ctx.globalAlpha = this.lifeSpan/fadeThresh ;
     }
      
        g_sprites.bullet.drawWrappedCentredAt(
